@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="English">
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Notebook Setup &mdash; titanic_survival_package 27.03.2024 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            titanic_survival_package
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Home</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules.html">API</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">titanic_survival_package</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Notebook Setup</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/notebooks/usage_example_2.ipynb.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="notebook-setup">
+<h1>Notebook Setup<a class="headerlink" href="#notebook-setup" title="Permalink to this heading"></a></h1>
+<div style="text-align: justify;">In this setup phase, essential modules and functions are imported to facilitate data preprocessing, feature engineering, hyperparameter tuning, model training, and evaluation processes. Additionally, common data manipulation and visualization libraries, such as Pandas, Matplotlib, and Seaborn, are included alongside scikit-learn's machine learning and preprocessing tools. This preparation step ensures that all necessary tools are readily available for conducting a comprehensive analysis and developing machine learning models to predict Titanic survival outcomes.</div><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Import necessary modules from the package</span>
+<span class="kn">from</span> <span class="nn">titanic_survival_package.data_preprocessing</span> <span class="kn">import</span> <span class="n">load_dataset</span><span class="p">,</span><span class="n">demonstrate_preprocessing</span><span class="p">,</span> <span class="n">fill_missing_values</span><span class="p">,</span> <span class="n">preprocess_data</span>
+<span class="kn">from</span> <span class="nn">titanic_survival_package.feature_engineering</span> <span class="kn">import</span> <span class="n">create_family_size_feature</span><span class="p">,</span> <span class="n">extract_and_process_titles</span><span class="p">,</span> <span class="n">add_interaction_terms</span><span class="p">,</span> <span class="n">drop_unnecessary_features</span>
+<span class="kn">from</span> <span class="nn">titanic_survival_package.hyperparameter_tuning</span> <span class="kn">import</span> <span class="n">tune_hyperparameters_grid</span><span class="p">,</span> <span class="n">tune_hyperparameters_random</span>
+<span class="kn">from</span> <span class="nn">titanic_survival_package.models</span> <span class="kn">import</span> <span class="n">ModelTrainer</span><span class="p">,</span> <span class="n">ModelEvaluator</span><span class="p">,</span> <span class="n">train_stacking_model</span><span class="p">,</span> <span class="n">generate_submission</span>
+
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
+<span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">LogisticRegression</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">accuracy_score</span><span class="p">,</span> <span class="n">classification_report</span>
+<span class="kn">from</span> <span class="nn">sklearn.ensemble</span> <span class="kn">import</span> <span class="n">RandomForestClassifier</span>
+<span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">StandardScaler</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">2</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="c1"># Import necessary modules from the package</span>
+<span class="ne">----&gt; </span><span class="mi">2</span> <span class="kn">from</span> <span class="nn">titanic_survival_package.data_preprocessing</span> <span class="kn">import</span> <span class="n">load_dataset</span><span class="p">,</span><span class="n">demonstrate_preprocessing</span><span class="p">,</span> <span class="n">fill_missing_values</span><span class="p">,</span> <span class="n">preprocess_data</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="kn">from</span> <span class="nn">titanic_survival_package.feature_engineering</span> <span class="kn">import</span> <span class="n">create_family_size_feature</span><span class="p">,</span> <span class="n">extract_and_process_titles</span><span class="p">,</span> <span class="n">add_interaction_terms</span><span class="p">,</span> <span class="n">drop_unnecessary_features</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="kn">from</span> <span class="nn">titanic_survival_package.hyperparameter_tuning</span> <span class="kn">import</span> <span class="n">tune_hyperparameters_grid</span><span class="p">,</span> <span class="n">tune_hyperparameters_random</span>
+
+<span class="ne">ModuleNotFoundError</span>: No module named &#39;titanic_survival_package&#39;
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="load-and-preprocess-the-data">
+<h1>Load and Preprocess the Data<a class="headerlink" href="#load-and-preprocess-the-data" title="Permalink to this heading"></a></h1>
+<div style="text-align: justify;">
+    During data loading and preprocessing, an initial analysis reveals insights into feature statistics, missing values, and data diversity. A correlation matrix further explores relationships, especially between numerical features and the 'Survived' target, guiding preprocessing and feature engineering to enhance model accuracy.
+A positive correlation between 'Survived' and 'Sex' suggests females had a higher survival rate, while a negative correlation with 'Pclass' highlights lower survival rates among lower-class passengers. Engineered features such as 'FamilySize', 'Title_Master', 'Title_Miss', 'Title_Mr', 'Title_Mrs', and 'Age_Pclass' are incorporated, reflecting detailed aspects of the dataset conducive to model refinement.
+</div><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># General Analysis of the Training Data</span>
+
+<span class="c1"># Basic statistical overview</span>
+<span class="n">train_description</span> <span class="o">=</span> <span class="n">train_df</span><span class="o">.</span><span class="n">describe</span><span class="p">(</span><span class="n">include</span><span class="o">=</span><span class="s1">&#39;all&#39;</span><span class="p">)</span>
+
+<span class="c1"># Checking for missing values in the training dataset</span>
+<span class="n">missing_values_train</span> <span class="o">=</span> <span class="n">train_df</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+
+<span class="c1"># Checking for unique values in each column to understand the diversity of data</span>
+<span class="n">unique_values_train</span> <span class="o">=</span> <span class="n">train_df</span><span class="o">.</span><span class="n">nunique</span><span class="p">()</span>
+
+<span class="c1"># Overview of correlation between features, especially with the target variable &#39;Survived&#39;</span>
+<span class="n">correlation_matrix</span> <span class="o">=</span> <span class="n">train_df</span><span class="o">.</span><span class="n">corr</span><span class="p">(</span><span class="n">numeric_only</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="n">train_description</span><span class="p">,</span> <span class="n">missing_values_train</span><span class="p">,</span> <span class="n">unique_values_train</span><span class="p">,</span> <span class="n">correlation_matrix</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(        PassengerId    Survived      Pclass         Sex         Age  \
+ count    891.000000  891.000000  891.000000  891.000000  891.000000   
+ unique          NaN         NaN         NaN         NaN         NaN   
+ top             NaN         NaN         NaN         NaN         NaN   
+ freq            NaN         NaN         NaN         NaN         NaN   
+ mean     446.000000    0.383838    2.308642    0.352413   29.361582   
+ std      257.353842    0.486592    0.836071    0.477990   13.019697   
+ min        1.000000    0.000000    1.000000    0.000000    0.420000   
+ 25%      223.500000    0.000000    2.000000    0.000000   22.000000   
+ 50%      446.000000    0.000000    3.000000    0.000000   28.000000   
+ 75%      668.500000    1.000000    3.000000    1.000000   35.000000   
+ max      891.000000    1.000000    3.000000    1.000000   80.000000   
+ 
+              SibSp       Parch        Fare    Embarked  FamilySize  \
+ count   891.000000  891.000000  891.000000  891.000000  891.000000   
+ unique         NaN         NaN         NaN         NaN         NaN   
+ top            NaN         NaN         NaN         NaN         NaN   
+ freq           NaN         NaN         NaN         NaN         NaN   
+ mean      0.523008    0.381594   32.204208    0.361392    1.904602   
+ std       1.102743    0.806057   49.693429    0.635673    1.613459   
+ min       0.000000    0.000000    0.000000    0.000000    1.000000   
+ 25%       0.000000    0.000000    7.910400    0.000000    1.000000   
+ 50%       0.000000    0.000000   14.454200    0.000000    1.000000   
+ 75%       1.000000    0.000000   31.000000    1.000000    2.000000   
+ max       8.000000    6.000000  512.329200    2.000000   11.000000   
+ 
+        Title_Master Title_Miss Title_Mr Title_Mrs Title_Rare  Age_Pclass  
+ count           891        891      891       891        891  891.000000  
+ unique            2          2        2         2          2         NaN  
+ top           False      False     True     False      False         NaN  
+ freq            851        706      517       765        868         NaN  
+ mean            NaN        NaN      NaN       NaN        NaN   64.089607  
+ std             NaN        NaN      NaN       NaN        NaN   32.494562  
+ min             NaN        NaN      NaN       NaN        NaN    0.920000  
+ 25%             NaN        NaN      NaN       NaN        NaN   40.000000  
+ 50%             NaN        NaN      NaN       NaN        NaN   63.000000  
+ 75%             NaN        NaN      NaN       NaN        NaN   84.000000  
+ max             NaN        NaN      NaN       NaN        NaN  222.000000  ,
+ PassengerId     0
+ Survived        0
+ Pclass          0
+ Sex             0
+ Age             0
+ SibSp           0
+ Parch           0
+ Fare            0
+ Embarked        0
+ FamilySize      0
+ Title_Master    0
+ Title_Miss      0
+ Title_Mr        0
+ Title_Mrs       0
+ Title_Rare      0
+ Age_Pclass      0
+ dtype: int64,
+ PassengerId     891
+ Survived          2
+ Pclass            3
+ Sex               2
+ Age              88
+ SibSp             7
+ Parch             7
+ Fare            248
+ Embarked          3
+ FamilySize        9
+ Title_Master      2
+ Title_Miss        2
+ Title_Mr          2
+ Title_Mrs         2
+ Title_Rare        2
+ Age_Pclass      128
+ dtype: int64,
+               PassengerId  Survived    Pclass       Sex       Age     SibSp  \
+ PassengerId      1.000000 -0.005007 -0.035144 -0.042939  0.034212 -0.057527   
+ Survived        -0.005007  1.000000 -0.338481  0.543351 -0.064910 -0.035322   
+ Pclass          -0.035144 -0.338481  1.000000 -0.131900 -0.339898  0.083081   
+ Sex             -0.042939  0.543351 -0.131900  1.000000 -0.081163  0.114631   
+ Age              0.034212 -0.064910 -0.339898 -0.081163  1.000000 -0.233296   
+ SibSp           -0.057527 -0.035322  0.083081  0.114631 -0.233296  1.000000   
+ Parch           -0.001652  0.081629  0.018443  0.245489 -0.172482  0.414838   
+ Fare             0.012658  0.257307 -0.549500  0.182333  0.096688  0.159651   
+ Embarked        -0.030467  0.106811  0.045702  0.116569 -0.009165 -0.059961   
+ FamilySize      -0.040143  0.016639  0.065997  0.200988 -0.245619  0.890712   
+ Title_Master    -0.026151  0.085221  0.082081 -0.159934 -0.373960  0.349559   
+ Title_Miss      -0.067731  0.335636 -0.010261  0.693916 -0.248559  0.083462   
+ Title_Mr         0.038850 -0.549199  0.142698 -0.867334  0.180808 -0.250489   
+ Title_Mrs        0.010256  0.341994 -0.153758  0.550146  0.167687  0.061668   
+ Title_Rare       0.063948 -0.012054 -0.187174 -0.075638  0.192912 -0.025874   
+ Age_Pclass       0.004083 -0.324559  0.522045 -0.172433  0.562135 -0.188211   
+ 
+                  Parch      Fare  Embarked  FamilySize  Title_Master  \
+ PassengerId  -0.001652  0.012658 -0.030467   -0.040143     -0.026151   
+ Survived      0.081629  0.257307  0.106811    0.016639      0.085221   
+ Pclass        0.018443 -0.549500  0.045702    0.065997      0.082081   
+ Sex           0.245489  0.182333  0.116569    0.200988     -0.159934   
+ Age          -0.172482  0.096688 -0.009165   -0.245619     -0.373960   
+ SibSp         0.414838  0.159651 -0.059961    0.890712      0.349559   
+ Parch         1.000000  0.216225 -0.078665    0.783111      0.267344   
+ Fare          0.216225  1.000000  0.062142    0.217138      0.010908   
+ Embarked     -0.078665  0.062142  1.000000   -0.080281     -0.012419   
+ FamilySize    0.783111  0.217138 -0.080281    1.000000      0.372472   
+ Title_Master  0.267344  0.010908 -0.012419    0.372472      1.000000   
+ Title_Miss    0.100998  0.119518  0.170479    0.107500     -0.110981   
+ Title_Mr     -0.333905 -0.183766 -0.113971   -0.338014     -0.254903   
+ Title_Mrs     0.223575  0.107259 -0.038203    0.153842     -0.087987   
+ Title_Rare   -0.059535  0.016275  0.018804   -0.047426     -0.035291   
+ Age_Pclass   -0.134979 -0.353204  0.018734   -0.196069     -0.298028   
+ 
+               Title_Miss  Title_Mr  Title_Mrs  Title_Rare  Age_Pclass  
+ PassengerId    -0.067731  0.038850   0.010256    0.063948    0.004083  
+ Survived        0.335636 -0.549199   0.341994   -0.012054   -0.324559  
+ Pclass         -0.010261  0.142698  -0.153758   -0.187174    0.522045  
+ Sex             0.693916 -0.867334   0.550146   -0.075638   -0.172433  
+ Age            -0.248559  0.180808   0.167687    0.192912    0.562135  
+ SibSp           0.083462 -0.250489   0.061668   -0.025874   -0.188211  
+ Parch           0.100998 -0.333905   0.223575   -0.059535   -0.134979  
+ Fare            0.119518 -0.183766   0.107259    0.016275   -0.353204  
+ Embarked        0.170479 -0.113971  -0.038203    0.018804    0.018734  
+ FamilySize      0.107500 -0.338014   0.153842   -0.047426   -0.196069  
+ Title_Master   -0.110981 -0.254903  -0.087987   -0.035291   -0.298028  
+ Title_Miss      1.000000 -0.601857  -0.207749   -0.083327   -0.231753  
+ Title_Mr       -0.601857  1.000000  -0.477160   -0.191387    0.295167  
+ Title_Mrs      -0.207749 -0.477160   1.000000   -0.066063    0.039543  
+ Title_Rare     -0.083327 -0.191387  -0.066063    1.000000   -0.023549  
+ Age_Pclass     -0.231753  0.295167   0.039543   -0.023549    1.000000  )
+</pre></div>
+</div>
+</div>
+</div>
+<div style="text-align: justify;">In this part, datasets are loaded and preprocessed. Initial loading segregates training and test datasets. An analysis, focusing on 'Sex', 'Pclass', and 'Embarked' features, is conducted on the training data. Subsequently, missing values are addressed, and columns deemed unnecessary are omitted. Finally, preprocessing further engineers and encodes features within the training dataset, preparing it for subsequent analysis and modeling.</div><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># load_dataset, fill_missing_values, preprocess_data</span>
+
+<span class="c1"># Load dataset</span>
+<span class="n">train_df</span> <span class="o">=</span> <span class="n">load_dataset</span><span class="p">(</span><span class="s1">&#39;train.csv&#39;</span><span class="p">)</span>
+<span class="n">test_df</span> <span class="o">=</span> <span class="n">load_dataset</span><span class="p">(</span><span class="s1">&#39;test.csv&#39;</span><span class="p">)</span>
+
+<span class="c1"># Detailed Analysis of Categorical Features: &#39;Sex&#39;, &#39;Pclass&#39;, and &#39;Embarked&#39;</span>
+<span class="n">demonstrate_preprocessing</span><span class="p">(</span><span class="n">train_df</span><span class="p">)</span>
+
+<span class="c1"># Fill missing values and drop unnecessary columns</span>
+<span class="n">train_df</span> <span class="o">=</span> <span class="n">fill_missing_values</span><span class="p">(</span><span class="n">train_df</span><span class="p">)</span>
+
+<span class="c1"># Apply preprocessing steps to engineer and encode features</span>
+<span class="n">train_df</span> <span class="o">=</span> <span class="n">preprocess_data</span><span class="p">(</span><span class="n">train_df</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/8f7ecd511718273cf4197f2fd9002a2861dda197e013b7ff357bb6c7155ea720.png" src="../_images/8f7ecd511718273cf4197f2fd9002a2861dda197e013b7ff357bb6c7155ea720.png" />
+<img alt="../_images/8957e3eb2550e2a3c620b9314317bdfe5a493bf9184ef375a57856fb1cda7c25.png" src="../_images/8957e3eb2550e2a3c620b9314317bdfe5a493bf9184ef375a57856fb1cda7c25.png" />
+</div>
+</div>
+</section>
+<section id="feature-engineering">
+<h1>Feature Engineering<a class="headerlink" href="#feature-engineering" title="Permalink to this heading"></a></h1>
+<div style="text-align: justify;">In the feature engineering phase, new attributes like 'FamilySize' are created, titles are extracted from names, unnecessary features are removed, and interaction terms are added to enrich the dataset. The data is then scaled and divided into training and validation sets, preparing it for the modeling stage. This step is vital for enhancing the dataset's complexity and potential predictive power.</div><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create &#39;FamilySize&#39; feature</span>
+<span class="n">train_df</span> <span class="o">=</span> <span class="n">create_family_size_feature</span><span class="p">(</span><span class="n">train_df</span><span class="p">)</span>
+
+<span class="c1"># Extract and process titles from &#39;Name&#39;</span>
+<span class="n">train_df</span> <span class="o">=</span> <span class="n">extract_and_process_titles</span><span class="p">(</span><span class="n">train_df</span><span class="p">)</span>
+
+<span class="c1"># Drop unnecessary features</span>
+<span class="n">train_df</span> <span class="o">=</span> <span class="n">drop_unnecessary_features</span><span class="p">(</span><span class="n">train_df</span><span class="p">)</span>
+
+<span class="c1"># Add interaction terms</span>
+<span class="n">train_df</span> <span class="o">=</span> <span class="n">add_interaction_terms</span><span class="p">(</span><span class="n">train_df</span><span class="p">)</span>
+
+<span class="c1"># Prepare the dataset for model training</span>
+<span class="n">features</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Pclass&#39;</span><span class="p">,</span> <span class="s1">&#39;Age&#39;</span><span class="p">,</span> <span class="s1">&#39;SibSp&#39;</span><span class="p">,</span> <span class="s1">&#39;Parch&#39;</span><span class="p">,</span> <span class="s1">&#39;Fare&#39;</span><span class="p">,</span> <span class="s1">&#39;Embarked&#39;</span><span class="p">,</span> <span class="s1">&#39;FamilySize&#39;</span><span class="p">,</span> <span class="s1">&#39;Sex&#39;</span><span class="p">]</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">train_df</span><span class="p">[</span><span class="n">features</span><span class="p">]</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">train_df</span><span class="p">[</span><span class="s1">&#39;Survived&#39;</span><span class="p">]</span>
+
+<span class="c1"># Define features after feature engineering steps are applied</span>
+<span class="n">features</span> <span class="o">=</span> <span class="n">train_df</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;Survived&#39;</span><span class="p">)</span>
+
+<span class="c1"># Splitting the data into training and validation sets</span>
+<span class="n">X_train</span><span class="p">,</span> <span class="n">X_val</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_val</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">train_df</span><span class="p">[</span><span class="n">features</span><span class="p">],</span> <span class="n">train_df</span><span class="p">[</span><span class="s1">&#39;Survived&#39;</span><span class="p">],</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+
+<span class="c1"># Scaling</span>
+<span class="n">scaler</span> <span class="o">=</span> <span class="n">StandardScaler</span><span class="p">()</span>
+<span class="n">X_train_scaled</span> <span class="o">=</span> <span class="n">scaler</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
+<span class="n">X_val_scaled</span> <span class="o">=</span> <span class="n">scaler</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X_val</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">train_df</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   PassengerId  Survived  Pclass  Sex   Age  SibSp  Parch     Fare  Embarked  \
+0            1         0       3    0  22.0      1      0   7.2500         0   
+1            2         1       1    1  38.0      1      0  71.2833         1   
+2            3         1       3    1  26.0      0      0   7.9250         0   
+3            4         1       1    1  35.0      1      0  53.1000         0   
+4            5         0       3    0  35.0      0      0   8.0500         0   
+
+   FamilySize  Title_Master  Title_Miss  Title_Mr  Title_Mrs  Title_Rare  \
+0           2         False       False      True      False       False   
+1           2         False       False     False       True       False   
+2           1         False        True     False      False       False   
+3           2         False       False     False       True       False   
+4           1         False       False      True      False       False   
+
+   Age_Pclass  
+0        66.0  
+1        38.0  
+2        78.0  
+3        35.0  
+4       105.0  
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="hyperparameter-tuning">
+<h1>Hyperparameter Tuning<a class="headerlink" href="#hyperparameter-tuning" title="Permalink to this heading"></a></h1>
+<div style="text-align: justify;">The hyperparameter tuning process identifies the optimal settings for the RandomForestClassifier model, using a defined set of features that include both original and engineered variables. The tuning results in selecting the best combination of 'max_depth', 'min_samples_split', and 'n_estimators', achieving a promising accuracy score. This step is critical for optimizing model performance by systematically exploring a range of hyperparameter values.</div><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Define features used for the model based on preprocessing and feature engineering steps</span>
+<span class="n">features</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Pclass&#39;</span><span class="p">,</span> <span class="s1">&#39;Age&#39;</span><span class="p">,</span> <span class="s1">&#39;SibSp&#39;</span><span class="p">,</span> <span class="s1">&#39;Parch&#39;</span><span class="p">,</span> <span class="s1">&#39;Fare&#39;</span><span class="p">,</span> <span class="s1">&#39;Embarked&#39;</span><span class="p">,</span> <span class="s1">&#39;FamilySize&#39;</span><span class="p">,</span> <span class="s1">&#39;Sex&#39;</span><span class="p">,</span> <span class="s1">&#39;Title_Master&#39;</span><span class="p">,</span> <span class="s1">&#39;Title_Miss&#39;</span><span class="p">,</span> <span class="s1">&#39;Title_Mr&#39;</span><span class="p">,</span> <span class="s1">&#39;Title_Mrs&#39;</span><span class="p">,</span> <span class="s1">&#39;Age_Pclass&#39;</span><span class="p">]</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">train_df</span><span class="p">[</span><span class="n">features</span><span class="p">]</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">train_df</span><span class="p">[</span><span class="s1">&#39;Survived&#39;</span><span class="p">]</span>
+
+<span class="c1"># Hyperparameters to tune</span>
+<span class="n">parameters</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;n_estimators&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">100</span><span class="p">,</span> <span class="mi">200</span><span class="p">],</span>
+    <span class="s1">&#39;max_depth&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">],</span>
+    <span class="s1">&#39;min_samples_split&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span>
+<span class="p">}</span>
+
+<span class="c1"># Tune hyperparameters for RandomForestClassifier</span>
+<span class="n">best_params</span><span class="p">,</span> <span class="n">best_score</span> <span class="o">=</span> <span class="n">tune_hyperparameters_grid</span><span class="p">(</span><span class="n">RandomForestClassifier</span><span class="p">(</span><span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">),</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">parameters</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Best Parameters: </span><span class="si">{</span><span class="n">best_params</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Best Score: </span><span class="si">{</span><span class="n">best_score</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Best Parameters: {&#39;max_depth&#39;: 10, &#39;min_samples_split&#39;: 2, &#39;n_estimators&#39;: 200}
+Best Score: 0.8327914129684263
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="model-training-and-evaluation">
+<h1>Model Training and Evaluation<a class="headerlink" href="#model-training-and-evaluation" title="Permalink to this heading"></a></h1>
+<div style="text-align: justify;">During the model training and evaluation, the RandomForestClassifier is optimized with previously determined best hyperparameters. After scaling the features, the model is trained and evaluated on a validation set, achieving an accuracy of approximately 83.8%. This demonstrates the model's effective predictive capability on the given dataset.</div><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Continue using the &#39;best_params&#39; obtained from hyperparameter tuning</span>
+
+<span class="n">best_params</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;n_estimators&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">100</span><span class="p">],</span>  <span class="c1"># Example: Number of trees in the forest, already correctly wrapped in a list</span>
+    <span class="s1">&#39;max_depth&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">10</span><span class="p">],</span>  <span class="c1"># Corrected: Wrapped the single value in a list</span>
+    <span class="s1">&#39;min_samples_split&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">2</span><span class="p">],</span>  <span class="c1"># Assuming this was also correctly wrapped in a list</span>
+    <span class="s1">&#39;min_samples_leaf&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span>  <span class="c1"># Assuming this was also correctly wrapped in a list</span>
+<span class="p">}</span>
+
+
+<span class="c1"># Training and evaluation setup</span>
+<span class="n">X_train</span><span class="p">,</span> <span class="n">X_val</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_val</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+
+<span class="c1"># Feature scaling</span>
+<span class="n">scaler</span> <span class="o">=</span> <span class="n">StandardScaler</span><span class="p">()</span>
+<span class="n">X_train_scaled</span> <span class="o">=</span> <span class="n">scaler</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
+<span class="n">X_val_scaled</span> <span class="o">=</span> <span class="n">scaler</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X_val</span><span class="p">)</span>
+
+<span class="c1"># Model Training</span>
+<span class="n">model_trainer</span> <span class="o">=</span> <span class="n">ModelTrainer</span><span class="p">(</span><span class="n">RandomForestClassifier</span><span class="p">(</span><span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">),</span> <span class="n">best_params</span><span class="p">)</span>
+<span class="n">best_model</span> <span class="o">=</span> <span class="n">model_trainer</span><span class="o">.</span><span class="n">train</span><span class="p">(</span><span class="n">X_train_scaled</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+
+<span class="c1"># Model Evaluation on Validation Set</span>
+<span class="n">accuracy</span> <span class="o">=</span> <span class="n">ModelEvaluator</span><span class="o">.</span><span class="n">evaluate_model</span><span class="p">(</span><span class="n">best_model</span><span class="p">,</span> <span class="n">X_val_scaled</span><span class="p">,</span> <span class="n">y_val</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Validation Set Accuracy: </span><span class="si">{</span><span class="n">accuracy</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Validation Set Accuracy: 0.8379888268156425
+</pre></div>
+</div>
+</div>
+</div>
+<div style="text-align: justify;">The test dataset undergoes the same preprocessing and feature engineering steps as the training dataset to ensure consistency in data structure and features. This preparation enables the application of the trained model to the test data, leading to the generation of survival predictions which are then formatted for submission.</div><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">test_df</span> <span class="o">=</span> <span class="n">fill_missing_values</span><span class="p">(</span><span class="n">test_df</span><span class="p">)</span>
+<span class="n">test_df</span> <span class="o">=</span> <span class="n">preprocess_data</span><span class="p">(</span><span class="n">test_df</span><span class="p">)</span>
+<span class="n">test_df</span> <span class="o">=</span> <span class="n">create_family_size_feature</span><span class="p">(</span><span class="n">test_df</span><span class="p">)</span>
+<span class="n">test_df</span> <span class="o">=</span> <span class="n">extract_and_process_titles</span><span class="p">(</span><span class="n">test_df</span><span class="p">)</span>
+<span class="n">test_df</span> <span class="o">=</span> <span class="n">drop_unnecessary_features</span><span class="p">(</span><span class="n">test_df</span><span class="p">)</span>
+<span class="n">test_df</span> <span class="o">=</span> <span class="n">add_interaction_terms</span><span class="p">(</span><span class="n">test_df</span><span class="p">)</span>
+
+<span class="n">X_test</span> <span class="o">=</span> <span class="n">test_df</span><span class="p">[</span><span class="n">features</span><span class="p">]</span>
+
+<span class="c1"># Ensure test_df_processed has the same columns as those used in training the model</span>
+<span class="k">if</span> <span class="nb">set</span><span class="p">(</span><span class="n">features</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="nb">set</span><span class="p">(</span><span class="n">X_test</span><span class="o">.</span><span class="n">columns</span><span class="p">):</span>
+    <span class="n">X_test</span> <span class="o">=</span> <span class="n">test_df</span><span class="p">[</span><span class="n">features</span><span class="p">]</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Test data missing some features used in training&quot;</span><span class="p">)</span>
+
+
+<span class="c1">#X_test_scaled = scaler.transform(X_test)</span>
+<span class="n">X_test_scaled</span> <span class="o">=</span> <span class="n">scaler</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span> <span class="c1">#scaler.transform(X_test)</span>
+
+<span class="c1"># Making predictions using the final Random Forest model</span>
+<span class="n">test_predictions</span> <span class="o">=</span> <span class="n">best_model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test_scaled</span><span class="p">)</span>
+
+<span class="c1"># Preparing the submission file format</span>
+<span class="n">submission</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+    <span class="s1">&#39;PassengerId&#39;</span><span class="p">:</span> <span class="n">test_df</span><span class="p">[</span><span class="s1">&#39;PassengerId&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;Survived&#39;</span><span class="p">:</span> <span class="n">test_predictions</span>
+<span class="p">})</span>
+
+<span class="c1"># Displaying the first few rows of the submission file</span>
+<span class="n">submission</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>PassengerId</th>
+      <th>Survived</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>892</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>893</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>894</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>895</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>896</td>
+      <td>1</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+<section id="generate-submission">
+<h1>Generate Submission<a class="headerlink" href="#generate-submission" title="Permalink to this heading"></a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Generate submission file</span>
+<span class="n">submission_file_path</span> <span class="o">=</span> <span class="s1">&#39;submission.csv&#39;</span>
+<span class="n">generate_submission</span><span class="p">(</span><span class="n">submission</span><span class="p">,</span> <span class="n">submission_file_path</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Submission file saved to submission.csv
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Bekzod Amonov, Trung Anh Ha.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
