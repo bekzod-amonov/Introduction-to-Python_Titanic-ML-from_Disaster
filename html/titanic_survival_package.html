@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="English" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>titanic survival prediction package &mdash; titanic_survival_package 27.03.2024 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=92fd9be5" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=19250c51"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Notebook Setup" href="notebooks/usage_example_2.html" />
+    <link rel="prev" title="titanic_survival_package" href="modules.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            titanic_survival_package
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">API</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">titanic survival prediction package</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#submodules">Submodules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-titanic_survival_package.data_preprocessing">survival_prediction.data_preprocessing module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#titanic_survival_package.data_preprocessing.demonstrate_preprocessing"><code class="docutils literal notranslate"><span class="pre">demonstrate_preprocessing()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#titanic_survival_package.data_preprocessing.fill_missing_values"><code class="docutils literal notranslate"><span class="pre">fill_missing_values()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#titanic_survival_package.data_preprocessing.load_dataset"><code class="docutils literal notranslate"><span class="pre">load_dataset()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#titanic_survival_package.data_preprocessing.preprocess_data"><code class="docutils literal notranslate"><span class="pre">preprocess_data()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-titanic_survival_package.feature_engineering">survival_prediction.feature_engineering module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#titanic_survival_package.feature_engineering.add_interaction_terms"><code class="docutils literal notranslate"><span class="pre">add_interaction_terms()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#titanic_survival_package.feature_engineering.create_family_size_feature"><code class="docutils literal notranslate"><span class="pre">create_family_size_feature()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#titanic_survival_package.feature_engineering.drop_unnecessary_features"><code class="docutils literal notranslate"><span class="pre">drop_unnecessary_features()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#titanic_survival_package.feature_engineering.extract_and_process_titles"><code class="docutils literal notranslate"><span class="pre">extract_and_process_titles()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-titanic_survival_package.hyperparameter_tuning">survival_prediction.hyperparameter_tuning module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#titanic_survival_package.hyperparameter_tuning.tune_hyperparameters_grid"><code class="docutils literal notranslate"><span class="pre">tune_hyperparameters_grid()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#titanic_survival_package.hyperparameter_tuning.tune_hyperparameters_random"><code class="docutils literal notranslate"><span class="pre">tune_hyperparameters_random()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-titanic_survival_package.models">survival_prediction.models module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#titanic_survival_package.models.ModelEvaluator"><code class="docutils literal notranslate"><span class="pre">ModelEvaluator</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#titanic_survival_package.models.ModelTrainer"><code class="docutils literal notranslate"><span class="pre">ModelTrainer</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#titanic_survival_package.models.generate_submission"><code class="docutils literal notranslate"><span class="pre">generate_submission()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#titanic_survival_package.models.train_stacking_model"><code class="docutils literal notranslate"><span class="pre">train_stacking_model()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/usage_example_2.html">Notebook Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/usage_example_2.html#load-and-preprocess-the-data">Load and Preprocess the Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/usage_example_2.html#feature-engineering">Feature Engineering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/usage_example_2.html#hyperparameter-tuning">Hyperparameter Tuning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/usage_example_2.html#model-training-and-evaluation">Model Training and Evaluation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/usage_example_2.html#generate-submission">Generate Submission</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">titanic_survival_package</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="modules.html">titanic_survival_package</a></li>
+      <li class="breadcrumb-item active">titanic survival prediction package</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/titanic_survival_package.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="titanic-survival-prediction-package">
+<h1>titanic survival prediction package<a class="headerlink" href="#titanic-survival-prediction-package" title="Link to this heading"></a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading"></a></h2>
+</section>
+<section id="module-titanic_survival_package.data_preprocessing">
+<span id="survival-prediction-data-preprocessing-module"></span><h2>survival_prediction.data_preprocessing module<a class="headerlink" href="#module-titanic_survival_package.data_preprocessing" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="titanic_survival_package.data_preprocessing.demonstrate_preprocessing">
+<span class="sig-prename descclassname"><span class="pre">titanic_survival_package.data_preprocessing.</span></span><span class="sig-name descname"><span class="pre">demonstrate_preprocessing</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filepath</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/titanic_survival_package/data_preprocessing.html#demonstrate_preprocessing"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#titanic_survival_package.data_preprocessing.demonstrate_preprocessing" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="titanic_survival_package.data_preprocessing.fill_missing_values">
+<span class="sig-prename descclassname"><span class="pre">titanic_survival_package.data_preprocessing.</span></span><span class="sig-name descname"><span class="pre">fill_missing_values</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dataframe</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/titanic_survival_package/data_preprocessing.html#fill_missing_values"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#titanic_survival_package.data_preprocessing.fill_missing_values" title="Link to this definition"></a></dt>
+<dd><p>Fills missing values in the 'Age' and 'Embarked' columns of the DataFrame.
+'Cabin' column is dropped due to high number of missing values.</p>
+<p>Parameters:
+- dataframe (DataFrame): The pandas DataFrame whose missing values are to be filled.</p>
+<p>Returns:
+- DataFrame: The DataFrame with missing values filled and 'Cabin' column dropped.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="titanic_survival_package.data_preprocessing.load_dataset">
+<span class="sig-prename descclassname"><span class="pre">titanic_survival_package.data_preprocessing.</span></span><span class="sig-name descname"><span class="pre">load_dataset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filepath</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/titanic_survival_package/data_preprocessing.html#load_dataset"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#titanic_survival_package.data_preprocessing.load_dataset" title="Link to this definition"></a></dt>
+<dd><p>Loads a dataset from the specified filepath.</p>
+<p>Parameters:
+- filepath (str): The path to the CSV file containing the dataset.</p>
+<p>Returns:
+- DataFrame: A pandas DataFrame containing the loaded dataset.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="titanic_survival_package.data_preprocessing.preprocess_data">
+<span class="sig-prename descclassname"><span class="pre">titanic_survival_package.data_preprocessing.</span></span><span class="sig-name descname"><span class="pre">preprocess_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dataframe</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/titanic_survival_package/data_preprocessing.html#preprocess_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#titanic_survival_package.data_preprocessing.preprocess_data" title="Link to this definition"></a></dt>
+<dd><p>Preprocesses the test data to align with the training data format.
+This includes filling missing values, computing 'FamilySize', mapping 'Sex' and 'Embarked' to numeric values,
+and one-hot encoding 'Embarked' and 'Sex' columns if necessary.</p>
+<p>Parameters:
+- test_df (DataFrame): The test data DataFrame to preprocess.
+- train_df (DataFrame): The training data DataFrame used as a reference for filling missing values.</p>
+<p>Returns:
+- DataFrame: The preprocessed test data DataFrame.</p>
+</dd></dl>
+
+</section>
+<section id="module-titanic_survival_package.feature_engineering">
+<span id="survival-prediction-feature-engineering-module"></span><h2>survival_prediction.feature_engineering module<a class="headerlink" href="#module-titanic_survival_package.feature_engineering" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="titanic_survival_package.feature_engineering.add_interaction_terms">
+<span class="sig-prename descclassname"><span class="pre">titanic_survival_package.feature_engineering.</span></span><span class="sig-name descname"><span class="pre">add_interaction_terms</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dataframe</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/titanic_survival_package/feature_engineering.html#add_interaction_terms"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#titanic_survival_package.feature_engineering.add_interaction_terms" title="Link to this definition"></a></dt>
+<dd><p>Creates and adds interaction terms to the DataFrame, specifically the interaction between 'Age' and 'Pclass',
+to potentially capture combined effects on survival.</p>
+<p>Parameters:
+- dataframe (DataFrame): The pandas DataFrame to which the interaction terms will be added.</p>
+<p>Returns:
+- DataFrame: The DataFrame with the new interaction terms included.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="titanic_survival_package.feature_engineering.create_family_size_feature">
+<span class="sig-prename descclassname"><span class="pre">titanic_survival_package.feature_engineering.</span></span><span class="sig-name descname"><span class="pre">create_family_size_feature</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dataframe</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/titanic_survival_package/feature_engineering.html#create_family_size_feature"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#titanic_survival_package.feature_engineering.create_family_size_feature" title="Link to this definition"></a></dt>
+<dd><p>Adds a new feature 'FamilySize' to the DataFrame, calculated as the sum of 'SibSp' (siblings/spouse aboard)
+and 'Parch' (parents/children aboard) plus one for the passenger themselves.</p>
+<p>Parameters:
+- dataframe (DataFrame): The pandas DataFrame to which the 'FamilySize' feature will be added.</p>
+<p>Returns:
+- DataFrame: The DataFrame with the new 'FamilySize' feature included.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="titanic_survival_package.feature_engineering.drop_unnecessary_features">
+<span class="sig-prename descclassname"><span class="pre">titanic_survival_package.feature_engineering.</span></span><span class="sig-name descname"><span class="pre">drop_unnecessary_features</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dataframe</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/titanic_survival_package/feature_engineering.html#drop_unnecessary_features"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#titanic_survival_package.feature_engineering.drop_unnecessary_features" title="Link to this definition"></a></dt>
+<dd><p>Removes features from the DataFrame that are deemed unnecessary for modeling,
+such as 'Ticket', 'Name', and 'PassengerId'.</p>
+<p>Parameters:
+- dataframe (DataFrame): The pandas DataFrame from which unnecessary features are to be dropped.</p>
+<p>Returns:
+- DataFrame: The DataFrame with specified features removed.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="titanic_survival_package.feature_engineering.extract_and_process_titles">
+<span class="sig-prename descclassname"><span class="pre">titanic_survival_package.feature_engineering.</span></span><span class="sig-name descname"><span class="pre">extract_and_process_titles</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dataframe</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/titanic_survival_package/feature_engineering.html#extract_and_process_titles"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#titanic_survival_package.feature_engineering.extract_and_process_titles" title="Link to this definition"></a></dt>
+<dd><p>Extracts titles from the 'Name' column, simplifies common or rare titles, and encodes these titles into
+dummy variables. The encoded titles are then appended to the DataFrame as new columns.</p>
+<p>Parameters:
+- dataframe (DataFrame): The pandas DataFrame from which titles are to be extracted and processed.</p>
+<p>Returns:
+- DataFrame: The DataFrame with new columns added for the encoded title dummy variables.</p>
+</dd></dl>
+
+</section>
+<section id="module-titanic_survival_package.hyperparameter_tuning">
+<span id="survival-prediction-hyperparameter-tuning-module"></span><h2>survival_prediction.hyperparameter_tuning module<a class="headerlink" href="#module-titanic_survival_package.hyperparameter_tuning" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="titanic_survival_package.hyperparameter_tuning.tune_hyperparameters_grid">
+<span class="sig-prename descclassname"><span class="pre">titanic_survival_package.hyperparameter_tuning.</span></span><span class="sig-name descname"><span class="pre">tune_hyperparameters_grid</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">X</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parameters</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/titanic_survival_package/hyperparameter_tuning.html#tune_hyperparameters_grid"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#titanic_survival_package.hyperparameter_tuning.tune_hyperparameters_grid" title="Link to this definition"></a></dt>
+<dd><p>Performs hyperparameter tuning using Grid Search Cross Validation. This method exhaustively
+searches through all specified parameter combinations in 'parameters'.</p>
+<p>Parameters:
+- model (estimator): The machine learning model/estimator for which hyperparameters are to be optimized.
+- X (array-like): Feature dataset used for training the model.
+- y (array-like): Target values corresponding to 'X'.
+- parameters (dict): Dictionary with parameters names (str) as keys and lists of parameter settings to try as values.</p>
+<p>Returns:
+- dict: The best parameter setting found on the given data.
+- float: Mean cross-validated score of the best_estimator.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="titanic_survival_package.hyperparameter_tuning.tune_hyperparameters_random">
+<span class="sig-prename descclassname"><span class="pre">titanic_survival_package.hyperparameter_tuning.</span></span><span class="sig-name descname"><span class="pre">tune_hyperparameters_random</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">X</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parameters</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_iter</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/titanic_survival_package/hyperparameter_tuning.html#tune_hyperparameters_random"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#titanic_survival_package.hyperparameter_tuning.tune_hyperparameters_random" title="Link to this definition"></a></dt>
+<dd><p>Performs hyperparameter tuning using Randomized Search Cross Validation. This method samples
+'n_iter' parameter settings from the specified 'parameters' distributions.</p>
+<p>Parameters:
+- model (estimator): The machine learning model/estimator for which hyperparameters are to be optimized.
+- X (array-like): Feature dataset used for training the model.
+- y (array-like): Target values corresponding to 'X'.
+- parameters (dict): Dictionary where keys are parameter names and values are distributions or lists of parameters to sample.
+- n_iter (int, optional): Number of parameter settings that are sampled. n_iter trades off runtime vs quality of the solution.</p>
+<p>Returns:
+- dict: The best parameter setting found on the given data.
+- float: Mean cross-validated score of the best_estimator.</p>
+</dd></dl>
+
+</section>
+<section id="module-titanic_survival_package.models">
+<span id="survival-prediction-models-module"></span><h2>survival_prediction.models module<a class="headerlink" href="#module-titanic_survival_package.models" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="titanic_survival_package.models.ModelEvaluator">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">titanic_survival_package.models.</span></span><span class="sig-name descname"><span class="pre">ModelEvaluator</span></span><a class="reference internal" href="_modules/titanic_survival_package/models.html#ModelEvaluator"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#titanic_survival_package.models.ModelEvaluator" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Provides a static method for evaluating machine learning models.</p>
+<p class="rubric">Methods</p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#titanic_survival_package.models.ModelEvaluator.evaluate_model" title="titanic_survival_package.models.ModelEvaluator.evaluate_model"><code class="xref py py-obj docutils literal notranslate"><span class="pre">evaluate_model</span></code></a>(model, X_test, y_test)</p></td>
+<td><p>Static method to evaluate the accuracy of a model on a test set.</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py method">
+<dt class="sig sig-object py" id="titanic_survival_package.models.ModelEvaluator.evaluate_model">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">evaluate_model</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">X_test</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_test</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/titanic_survival_package/models.html#ModelEvaluator.evaluate_model"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#titanic_survival_package.models.ModelEvaluator.evaluate_model" title="Link to this definition"></a></dt>
+<dd><p>Static method to evaluate the accuracy of a model on a test set.</p>
+<p>Parameters:
+- model (estimator): The trained machine learning model.
+- X_test (array-like): Test data features.
+- y_test (array-like): True labels for the test data.</p>
+<p>Returns:
+- Accuracy score of the model on the test data.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="titanic_survival_package.models.ModelTrainer">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">titanic_survival_package.models.</span></span><span class="sig-name descname"><span class="pre">ModelTrainer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">param_grid</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/titanic_survival_package/models.html#ModelTrainer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#titanic_survival_package.models.ModelTrainer" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>A class dedicated to training machine learning models using GridSearchCV for hyperparameter optimization.</p>
+<p>Attributes:
+- model (estimator): The machine learning estimator to be trained.
+- param_grid (dict): A dictionary specifying the parameter grid for hyperparameter tuning.
+- best_model (estimator, optional): Stores the best estimator after training.</p>
+<p class="rubric">Methods</p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#titanic_survival_package.models.ModelTrainer.evaluate" title="titanic_survival_package.models.ModelTrainer.evaluate"><code class="xref py py-obj docutils literal notranslate"><span class="pre">evaluate</span></code></a>(X_test, y_test)</p></td>
+<td><p>Evaluates the trained model on a test dataset.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#titanic_survival_package.models.ModelTrainer.train" title="titanic_survival_package.models.ModelTrainer.train"><code class="xref py py-obj docutils literal notranslate"><span class="pre">train</span></code></a>(X, y)</p></td>
+<td><p>Trains the model using GridSearchCV with the provided parameters.</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py method">
+<dt class="sig sig-object py" id="titanic_survival_package.models.ModelTrainer.evaluate">
+<span class="sig-name descname"><span class="pre">evaluate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X_test</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_test</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/titanic_survival_package/models.html#ModelTrainer.evaluate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#titanic_survival_package.models.ModelTrainer.evaluate" title="Link to this definition"></a></dt>
+<dd><p>Evaluates the trained model on a test dataset.</p>
+<p>Parameters:
+- X_test (array-like): Feature data for testing.
+- y_test (array-like): Actual target values for the test data.</p>
+<p>Returns:
+- Accuracy score of the model on the test data.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="titanic_survival_package.models.ModelTrainer.train">
+<span class="sig-name descname"><span class="pre">train</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/titanic_survival_package/models.html#ModelTrainer.train"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#titanic_survival_package.models.ModelTrainer.train" title="Link to this definition"></a></dt>
+<dd><p>Trains the model using GridSearchCV with the provided parameters.</p>
+<p>Parameters:
+- X (array-like): Feature data used for training.
+- y (array-like): Target values.</p>
+<p>Returns:
+- The best estimator after performing grid search.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="titanic_survival_package.models.generate_submission">
+<span class="sig-prename descclassname"><span class="pre">titanic_survival_package.models.</span></span><span class="sig-name descname"><span class="pre">generate_submission</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">test_data_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">submission_file_path</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/titanic_survival_package/models.html#generate_submission"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#titanic_survival_package.models.generate_submission" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="titanic_survival_package.models.train_stacking_model">
+<span class="sig-prename descclassname"><span class="pre">titanic_survival_package.models.</span></span><span class="sig-name descname"><span class="pre">train_stacking_model</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X_train</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_train</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/titanic_survival_package/models.html#train_stacking_model"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#titanic_survival_package.models.train_stacking_model" title="Link to this definition"></a></dt>
+<dd><p>Trains a stacking ensemble model using pre-defined base learners and a final estimator.</p>
+<p>Parameters:
+- X_train (array-like): Training data features.
+- y_train (array-like): Training data labels.</p>
+<p>Returns:
+- The trained stacking model.</p>
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="modules.html" class="btn btn-neutral float-left" title="titanic_survival_package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="notebooks/usage_example_2.html" class="btn btn-neutral float-right" title="Notebook Setup" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Bekzod Amonov, Trung Anh Ha.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

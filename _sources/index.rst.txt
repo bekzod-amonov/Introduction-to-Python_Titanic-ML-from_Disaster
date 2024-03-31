@@ -11,9 +11,9 @@ Titanic Survival Prediction Package
    :maxdepth: 3
    :caption: Contents:
 
-   Home <self>
+
    API <modules>
-   Example <notebooks/usage_example>
+   Example <notebooks/usage_example_2>
 
 
 
@@ -46,16 +46,3 @@ Predictor
 -----------
 
 Functions for making predictions with trained models and generating submission files.
-
-
-
-
-
-
-
-
-
-
-
-
-

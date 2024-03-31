@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="English" data-content_root="../">
 <head>
-  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>&lt;no title&gt; &mdash; titanic_survival_package 27.03.2024 documentation</title>
-      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=92fd9be5" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
 
@@ -43,10 +43,18 @@
   </form>
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <!-- Local TOC -->
-              <div class="local-toc"><ul class="simple">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Home</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules.html">API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="usage_example_2.html">Notebook Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="usage_example_2.html#load-and-preprocess-the-data">Load and Preprocess the Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="usage_example_2.html#feature-engineering">Feature Engineering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="usage_example_2.html#hyperparameter-tuning">Hyperparameter Tuning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="usage_example_2.html#model-training-and-evaluation">Model Training and Evaluation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="usage_example_2.html#generate-submission">Generate Submission</a></li>
 </ul>
-</div>
+
         </div>
       </div>
     </nav>
@@ -95,14 +103,45 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
-<span class="ne">----&gt; </span><span class="mi">1</span> <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="c1"># Load the provided datasets</span>
-<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="n">train_file_path</span> <span class="o">=</span> <span class="s1">&#39;train.csv&#39;</span>
-
-<span class="ne">ModuleNotFoundError</span>: No module named &#39;pandas&#39;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(   PassengerId  Survived  Pclass  \
+ 0            1         0       3   
+ 1            2         1       1   
+ 2            3         1       3   
+ 3            4         1       1   
+ 4            5         0       3   
+ 
+                                                 Name     Sex   Age  SibSp  \
+ 0                            Braund, Mr. Owen Harris    male  22.0      1   
+ 1  Cumings, Mrs. John Bradley (Florence Briggs Th...  female  38.0      1   
+ 2                             Heikkinen, Miss. Laina  female  26.0      0   
+ 3       Futrelle, Mrs. Jacques Heath (Lily May Peel)  female  35.0      1   
+ 4                           Allen, Mr. William Henry    male  35.0      0   
+ 
+    Parch            Ticket     Fare Cabin Embarked  
+ 0      0         A/5 21171   7.2500   NaN        S  
+ 1      0          PC 17599  71.2833   C85        C  
+ 2      0  STON/O2. 3101282   7.9250   NaN        S  
+ 3      0            113803  53.1000  C123        S  
+ 4      0            373450   8.0500   NaN        S  ,
+    PassengerId  Pclass                                          Name     Sex  \
+ 0          892       3                              Kelly, Mr. James    male   
+ 1          893       3              Wilkes, Mrs. James (Ellen Needs)  female   
+ 2          894       2                     Myles, Mr. Thomas Francis    male   
+ 3          895       3                              Wirz, Mr. Albert    male   
+ 4          896       3  Hirvonen, Mrs. Alexander (Helga E Lindqvist)  female   
+ 
+     Age  SibSp  Parch   Ticket     Fare Cabin Embarked  
+ 0  34.5      0      0   330911   7.8292   NaN        Q  
+ 1  47.0      1      0   363272   7.0000   NaN        S  
+ 2  62.0      0      0   240276   9.6875   NaN        Q  
+ 3  27.0      0      0   315154   8.6625   NaN        S  
+ 4  22.0      1      1  3101298  12.2875   NaN        S  ,
+    PassengerId  Survived
+ 0          892         0
+ 1          893         1
+ 2          894         0
+ 3          895         0
+ 4          896         1)
 </pre></div>
 </div>
 </div>
@@ -260,7 +299,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/8c360e5705f4227449efc116bef5176e233db5ca1fe611ff92015e067168671a.png" src="../_images/8c360e5705f4227449efc116bef5176e233db5ca1fe611ff92015e067168671a.png" />
+<img alt="../_images/3b0f7614939f09ea9fc7d6e0e02dd99ecc159189fafdd68747c8f4d3e934a777.png" src="../_images/3b0f7614939f09ea9fc7d6e0e02dd99ecc159189fafdd68747c8f4d3e934a777.png" />
 <img alt="../_images/8957e3eb2550e2a3c620b9314317bdfe5a493bf9184ef375a57856fb1cda7c25.png" src="../_images/8957e3eb2550e2a3c620b9314317bdfe5a493bf9184ef375a57856fb1cda7c25.png" />
 </div>
 </div>
@@ -553,102 +592,6 @@
 </div>
 </div>
 </div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Preprocessing the test dataset similar to the training dataset</span>
-
-<span class="c1"># Imputing missing values in &#39;Age&#39; and &#39;Fare&#39; with the median from the training dataset</span>
-<span class="n">test_df</span><span class="p">[</span><span class="s1">&#39;Age&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="n">median_age</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="n">median_fare</span> <span class="o">=</span> <span class="n">train_df</span><span class="p">[</span><span class="s1">&#39;Fare&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">median</span><span class="p">()</span>
-<span class="n">test_df</span><span class="p">[</span><span class="s1">&#39;Fare&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="n">median_fare</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-
-<span class="c1"># Handling &#39;Cabin&#39; in the test dataset</span>
-<span class="n">test_df</span><span class="p">[</span><span class="s1">&#39;CabinType&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">test_df</span><span class="p">[</span><span class="s1">&#39;Cabin&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">if</span> <span class="n">pd</span><span class="o">.</span><span class="n">notna</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">else</span> <span class="s1">&#39;Unknown&#39;</span><span class="p">)</span>
-
-<span class="c1"># Creating &#39;FamilySize&#39; in the test dataset</span>
-<span class="n">test_df</span><span class="p">[</span><span class="s1">&#39;FamilySize&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">test_df</span><span class="p">[</span><span class="s1">&#39;SibSp&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="n">test_df</span><span class="p">[</span><span class="s1">&#39;Parch&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span>
-
-<span class="c1"># Encoding categorical variables in the test dataset</span>
-<span class="n">test_df</span><span class="p">[</span><span class="s1">&#39;Sex&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">test_df</span><span class="p">[</span><span class="s1">&#39;Sex&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">map</span><span class="p">({</span><span class="s1">&#39;male&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;female&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">})</span>
-<span class="n">test_df</span><span class="p">[</span><span class="s1">&#39;Embarked&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">test_df</span><span class="p">[</span><span class="s1">&#39;Embarked&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">map</span><span class="p">({</span><span class="s1">&#39;S&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;Q&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">})</span>
-
-<span class="c1"># Selecting the same features as used for training the model</span>
-<span class="n">X_test</span> <span class="o">=</span> <span class="n">test_df</span><span class="p">[</span><span class="n">features</span><span class="p">]</span>
-
-<span class="c1"># Scaling the test dataset features</span>
-<span class="n">X_test_scaled</span> <span class="o">=</span> <span class="n">scaler</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
-
-<span class="c1"># Making predictions using the final Random Forest model</span>
-<span class="n">test_predictions</span> <span class="o">=</span> <span class="n">final_rf_model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test_scaled</span><span class="p">)</span>
-
-<span class="c1"># Preparing the submission file format</span>
-<span class="n">submission</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
-    <span class="s1">&#39;PassengerId&#39;</span><span class="p">:</span> <span class="n">test_df</span><span class="p">[</span><span class="s1">&#39;PassengerId&#39;</span><span class="p">],</span>
-    <span class="s1">&#39;Survived&#39;</span><span class="p">:</span> <span class="n">test_predictions</span>
-<span class="p">})</span>
-
-<span class="c1"># Displaying the first few rows of the submission file</span>
-<span class="n">submission</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/bekzodamonov/anaconda3/lib/python3.11/site-packages/sklearn/base.py:464: UserWarning: X does not have valid feature names, but RandomForestClassifier was fitted with feature names
-  warnings.warn(
-</pre></div>
-</div>
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>PassengerId</th>
-      <th>Survived</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>892</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>893</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>894</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>895</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>896</td>
-      <td>1</td>
-    </tr>
-  </tbody>
-</table>
-</div></div></div>
-</div>
 <ol class="arabic simple">
 <li><p>Advanced Feature Engineering: Title Extraction</p></li>
 </ol>
@@ -669,6 +612,33 @@
 <span class="c1"># One-hot encoding of the &#39;Title&#39; feature</span>
 <span class="n">train_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">get_dummies</span><span class="p">(</span><span class="n">train_df</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Title&#39;</span><span class="p">])</span>
 <span class="n">test_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">get_dummies</span><span class="p">(</span><span class="n">test_df</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Title&#39;</span><span class="p">])</span>
+
+
+<span class="nb">print</span><span class="p">(</span><span class="n">test_df</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   PassengerId  Pclass                                          Name     Sex  \
+0          892       3                              Kelly, Mr. James    male   
+1          893       3              Wilkes, Mrs. James (Ellen Needs)  female   
+2          894       2                     Myles, Mr. Thomas Francis    male   
+3          895       3                              Wirz, Mr. Albert    male   
+4          896       3  Hirvonen, Mrs. Alexander (Helga E Lindqvist)  female   
+
+    Age  SibSp  Parch   Ticket     Fare Cabin Embarked  Title_Master  \
+0  34.5      0      0   330911   7.8292   NaN        Q         False   
+1  47.0      1      0   363272   7.0000   NaN        S         False   
+2  62.0      0      0   240276   9.6875   NaN        Q         False   
+3  27.0      0      0   315154   8.6625   NaN        S         False   
+4  22.0      1      1  3101298  12.2875   NaN        S         False   
+
+   Title_Miss  Title_Mr  Title_Mrs  Title_Rare  
+0       False      True      False       False  
+1       False     False       True       False  
+2       False      True      False       False  
+3       False      True      False       False  
+4       False     False       True       False  
 </pre></div>
 </div>
 </div>
@@ -907,7 +877,78 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;titanic_stacking_submission-final.csv&#39;
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">KeyError</span><span class="g g-Whitespace">                                  </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">17</span><span class="p">],</span> <span class="n">line</span> <span class="mi">2</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="c1">#Scaling the test data features</span>
+<span class="ne">----&gt; </span><span class="mi">2</span> <span class="n">X_test_interactions</span> <span class="o">=</span> <span class="n">test_df</span><span class="p">[</span><span class="n">refined_features</span><span class="p">]</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="n">X_test_scaled_interactions</span> <span class="o">=</span> <span class="n">scaler</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X_test_interactions</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="c1"># Generating predictions using the stacking model with interaction terms</span>
+
+<span class="nn">File ~/anaconda3/lib/python3.11/site-packages/pandas/core/frame.py:3767,</span> in <span class="ni">DataFrame.__getitem__</span><span class="nt">(self, key)</span>
+<span class="g g-Whitespace">   </span><span class="mi">3765</span>     <span class="k">if</span> <span class="n">is_iterator</span><span class="p">(</span><span class="n">key</span><span class="p">):</span>
+<span class="g g-Whitespace">   </span><span class="mi">3766</span>         <span class="n">key</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+<span class="ne">-&gt; </span><span class="mi">3767</span>     <span class="n">indexer</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">_get_indexer_strict</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="s2">&quot;columns&quot;</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+<span class="g g-Whitespace">   </span><span class="mi">3769</span> <span class="c1"># take() does not accept boolean indexers</span>
+<span class="g g-Whitespace">   </span><span class="mi">3770</span> <span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">indexer</span><span class="p">,</span> <span class="s2">&quot;dtype&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span> <span class="o">==</span> <span class="nb">bool</span><span class="p">:</span>
+
+<span class="nn">File ~/anaconda3/lib/python3.11/site-packages/pandas/core/indexes/base.py:5877,</span> in <span class="ni">Index._get_indexer_strict</span><span class="nt">(self, key, axis_name)</span>
+<span class="g g-Whitespace">   </span><span class="mi">5874</span> <span class="k">else</span><span class="p">:</span>
+<span class="g g-Whitespace">   </span><span class="mi">5875</span>     <span class="n">keyarr</span><span class="p">,</span> <span class="n">indexer</span><span class="p">,</span> <span class="n">new_indexer</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_reindex_non_unique</span><span class="p">(</span><span class="n">keyarr</span><span class="p">)</span>
+<span class="ne">-&gt; </span><span class="mi">5877</span> <span class="bp">self</span><span class="o">.</span><span class="n">_raise_if_missing</span><span class="p">(</span><span class="n">keyarr</span><span class="p">,</span> <span class="n">indexer</span><span class="p">,</span> <span class="n">axis_name</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">5879</span> <span class="n">keyarr</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">take</span><span class="p">(</span><span class="n">indexer</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">5880</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">Index</span><span class="p">):</span>
+<span class="g g-Whitespace">   </span><span class="mi">5881</span>     <span class="c1"># GH 42790 - Preserve name from an Index</span>
+
+<span class="nn">File ~/anaconda3/lib/python3.11/site-packages/pandas/core/indexes/base.py:5941,</span> in <span class="ni">Index._raise_if_missing</span><span class="nt">(self, key, indexer, axis_name)</span>
+<span class="g g-Whitespace">   </span><span class="mi">5938</span>     <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;None of [</span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2">] are in the [</span><span class="si">{</span><span class="n">axis_name</span><span class="si">}</span><span class="s2">]&quot;</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">5940</span> <span class="n">not_found</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">ensure_index</span><span class="p">(</span><span class="n">key</span><span class="p">)[</span><span class="n">missing_mask</span><span class="o">.</span><span class="n">nonzero</span><span class="p">()[</span><span class="mi">0</span><span class="p">]]</span><span class="o">.</span><span class="n">unique</span><span class="p">())</span>
+<span class="ne">-&gt; </span><span class="mi">5941</span> <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">not_found</span><span class="si">}</span><span class="s2"> not in index&quot;</span><span class="p">)</span>
+
+<span class="ne">KeyError</span>: &quot;[&#39;FamilySize&#39;] not in index&quot;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="c1"># Assuming paths to your training and test datasets</span>
+    <span class="n">train_data_path</span> <span class="o">=</span> <span class="s1">&#39;path/to/train.csv&#39;</span>
+    <span class="n">test_data_path</span> <span class="o">=</span> <span class="s1">&#39;path/to/test.csv&#39;</span>
+    
+    <span class="c1"># Loading and preprocessing the training data</span>
+    <span class="n">train_df</span> <span class="o">=</span> <span class="n">load_dataset</span><span class="p">(</span><span class="n">train_data_path</span><span class="p">)</span>
+    <span class="n">train_df</span> <span class="o">=</span> <span class="n">fill_missing_values</span><span class="p">(</span><span class="n">train_df</span><span class="p">)</span>
+    <span class="n">train_df</span> <span class="o">=</span> <span class="n">preprocess_test_data</span><span class="p">(</span><span class="n">train_df</span><span class="p">,</span> <span class="n">train_df</span><span class="p">)</span>  <span class="c1"># Using the same preprocessing for simplicity</span>
+    
+    <span class="c1"># Feature engineering</span>
+    <span class="n">train_df</span> <span class="o">=</span> <span class="n">create_family_size_feature</span><span class="p">(</span><span class="n">train_df</span><span class="p">)</span>
+    <span class="n">train_df</span> <span class="o">=</span> <span class="n">drop_unnecessary_features</span><span class="p">(</span><span class="n">train_df</span><span class="p">)</span>
+    <span class="n">train_df</span> <span class="o">=</span> <span class="n">extract_and_process_titles</span><span class="p">(</span><span class="n">train_df</span><span class="p">)</span>
+    <span class="n">train_df</span> <span class="o">=</span> <span class="n">add_interaction_terms</span><span class="p">(</span><span class="n">train_df</span><span class="p">)</span>
+    
+    <span class="c1"># Prepare features and target</span>
+    <span class="n">X</span> <span class="o">=</span> <span class="n">train_df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;Survived&#39;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">train_df</span><span class="p">[</span><span class="s1">&#39;Survived&#39;</span><span class="p">]</span>
+    
+    <span class="c1"># Train the model</span>
+    <span class="n">model_trainer</span> <span class="o">=</span> <span class="n">ModelTrainer</span><span class="p">(</span><span class="n">RandomForestClassifier</span><span class="p">(),</span> <span class="n">best_params</span><span class="p">)</span>
+    <span class="n">final_model</span> <span class="o">=</span> <span class="n">model_trainer</span><span class="o">.</span><span class="n">train</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+    
+    <span class="c1"># Preparing the test data (X_test)</span>
+    <span class="n">test_df</span> <span class="o">=</span> <span class="n">load_dataset</span><span class="p">(</span><span class="n">test_data_path</span><span class="p">)</span>
+    <span class="n">test_df</span> <span class="o">=</span> <span class="n">fill_missing_values</span><span class="p">(</span><span class="n">test_df</span><span class="p">)</span>
+    <span class="n">test_df</span> <span class="o">=</span> <span class="n">preprocess_test_data</span><span class="p">(</span><span class="n">test_df</span><span class="p">,</span> <span class="n">train_df</span><span class="p">)</span>  <span class="c1"># Note: Use train_df for filling missing values</span>
+    <span class="n">test_df</span> <span class="o">=</span> <span class="n">create_family_size_feature</span><span class="p">(</span><span class="n">test_df</span><span class="p">)</span>
+    <span class="n">test_df</span> <span class="o">=</span> <span class="n">drop_unnecessary_features</span><span class="p">(</span><span class="n">test_df</span><span class="p">)</span>
+    <span class="n">test_df</span> <span class="o">=</span> <span class="n">extract_and_process_titles</span><span class="p">(</span><span class="n">test_df</span><span class="p">)</span>
+    <span class="n">test_df</span> <span class="o">=</span> <span class="n">add_interaction_terms</span><span class="p">(</span><span class="n">test_df</span><span class="p">)</span>
+    <span class="n">X_test</span> <span class="o">=</span> <span class="n">test_df</span>  <span class="c1"># Assuming no target variable in the test set</span>
+    
+    <span class="c1"># Optionally, you could save final_model and X_test for later use</span>
+    <span class="c1"># e.g., final_model.save(&#39;path/to/save_model.pkl&#39;)</span>
+    <span class="c1"># X_test.to_csv(&#39;path/to/save_X_test.csv&#39;)</span>
 </pre></div>
 </div>
 </div>

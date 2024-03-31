@@ -22,7 +22,8 @@
         <script src="../_static/sphinx_highlight.js"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
-    <link rel="search" title="Search" href="../search.html" /> 
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="titanic survival prediction package" href="../titanic_survival_package.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -45,9 +46,14 @@
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../index.html">Home</a></li>
+<ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../modules.html">API</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Notebook Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#load-and-preprocess-the-data">Load and Preprocess the Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#feature-engineering">Feature Engineering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#hyperparameter-tuning">Hyperparameter Tuning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#model-training-and-evaluation">Model Training and Evaluation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#generate-submission">Generate Submission</a></li>
 </ul>
 
         </div>
@@ -120,6 +126,7 @@ A positive correlation between 'Survived' and 'Sex' suggests females had a highe
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># General Analysis of the Training Data</span>
 
 <span class="c1"># Basic statistical overview</span>
+<span class="n">train_df</span> <span class="o">=</span> <span class="n">load_dataset</span><span class="p">(</span><span class="s1">&#39;train.csv&#39;</span><span class="p">)</span>
 <span class="n">train_description</span> <span class="o">=</span> <span class="n">train_df</span><span class="o">.</span><span class="n">describe</span><span class="p">(</span><span class="n">include</span><span class="o">=</span><span class="s1">&#39;all&#39;</span><span class="p">)</span>
 
 <span class="c1"># Checking for missing values in the training dataset</span>
@@ -136,131 +143,87 @@ A positive correlation between 'Survived' and 'Sex' suggests females had a highe
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(        PassengerId    Survived      Pclass         Sex         Age  \
- count    891.000000  891.000000  891.000000  891.000000  891.000000   
- unique          NaN         NaN         NaN         NaN         NaN   
- top             NaN         NaN         NaN         NaN         NaN   
- freq            NaN         NaN         NaN         NaN         NaN   
- mean     446.000000    0.383838    2.308642    0.352413   29.361582   
- std      257.353842    0.486592    0.836071    0.477990   13.019697   
- min        1.000000    0.000000    1.000000    0.000000    0.420000   
- 25%      223.500000    0.000000    2.000000    0.000000   22.000000   
- 50%      446.000000    0.000000    3.000000    0.000000   28.000000   
- 75%      668.500000    1.000000    3.000000    1.000000   35.000000   
- max      891.000000    1.000000    3.000000    1.000000   80.000000   
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(        PassengerId    Survived      Pclass                     Name   Sex  \
+ count    891.000000  891.000000  891.000000                      891   891   
+ unique          NaN         NaN         NaN                      891     2   
+ top             NaN         NaN         NaN  Braund, Mr. Owen Harris  male   
+ freq            NaN         NaN         NaN                        1   577   
+ mean     446.000000    0.383838    2.308642                      NaN   NaN   
+ std      257.353842    0.486592    0.836071                      NaN   NaN   
+ min        1.000000    0.000000    1.000000                      NaN   NaN   
+ 25%      223.500000    0.000000    2.000000                      NaN   NaN   
+ 50%      446.000000    0.000000    3.000000                      NaN   NaN   
+ 75%      668.500000    1.000000    3.000000                      NaN   NaN   
+ max      891.000000    1.000000    3.000000                      NaN   NaN   
  
-              SibSp       Parch        Fare    Embarked  FamilySize  \
- count   891.000000  891.000000  891.000000  891.000000  891.000000   
- unique         NaN         NaN         NaN         NaN         NaN   
- top            NaN         NaN         NaN         NaN         NaN   
- freq           NaN         NaN         NaN         NaN         NaN   
- mean      0.523008    0.381594   32.204208    0.361392    1.904602   
- std       1.102743    0.806057   49.693429    0.635673    1.613459   
- min       0.000000    0.000000    0.000000    0.000000    1.000000   
- 25%       0.000000    0.000000    7.910400    0.000000    1.000000   
- 50%       0.000000    0.000000   14.454200    0.000000    1.000000   
- 75%       1.000000    0.000000   31.000000    1.000000    2.000000   
- max       8.000000    6.000000  512.329200    2.000000   11.000000   
+                Age       SibSp       Parch  Ticket        Fare    Cabin  \
+ count   714.000000  891.000000  891.000000     891  891.000000      204   
+ unique         NaN         NaN         NaN     681         NaN      147   
+ top            NaN         NaN         NaN  347082         NaN  B96 B98   
+ freq           NaN         NaN         NaN       7         NaN        4   
+ mean     29.699118    0.523008    0.381594     NaN   32.204208      NaN   
+ std      14.526497    1.102743    0.806057     NaN   49.693429      NaN   
+ min       0.420000    0.000000    0.000000     NaN    0.000000      NaN   
+ 25%      20.125000    0.000000    0.000000     NaN    7.910400      NaN   
+ 50%      28.000000    0.000000    0.000000     NaN   14.454200      NaN   
+ 75%      38.000000    1.000000    0.000000     NaN   31.000000      NaN   
+ max      80.000000    8.000000    6.000000     NaN  512.329200      NaN   
  
-        Title_Master Title_Miss Title_Mr Title_Mrs Title_Rare  Age_Pclass  
- count           891        891      891       891        891  891.000000  
- unique            2          2        2         2          2         NaN  
- top           False      False     True     False      False         NaN  
- freq            851        706      517       765        868         NaN  
- mean            NaN        NaN      NaN       NaN        NaN   64.089607  
- std             NaN        NaN      NaN       NaN        NaN   32.494562  
- min             NaN        NaN      NaN       NaN        NaN    0.920000  
- 25%             NaN        NaN      NaN       NaN        NaN   40.000000  
- 50%             NaN        NaN      NaN       NaN        NaN   63.000000  
- 75%             NaN        NaN      NaN       NaN        NaN   84.000000  
- max             NaN        NaN      NaN       NaN        NaN  222.000000  ,
- PassengerId     0
- Survived        0
- Pclass          0
- Sex             0
- Age             0
- SibSp           0
- Parch           0
- Fare            0
- Embarked        0
- FamilySize      0
- Title_Master    0
- Title_Miss      0
- Title_Mr        0
- Title_Mrs       0
- Title_Rare      0
- Age_Pclass      0
+        Embarked  
+ count       889  
+ unique        3  
+ top           S  
+ freq        644  
+ mean        NaN  
+ std         NaN  
+ min         NaN  
+ 25%         NaN  
+ 50%         NaN  
+ 75%         NaN  
+ max         NaN  ,
+ PassengerId      0
+ Survived         0
+ Pclass           0
+ Name             0
+ Sex              0
+ Age            177
+ SibSp            0
+ Parch            0
+ Ticket           0
+ Fare             0
+ Cabin          687
+ Embarked         2
  dtype: int64,
- PassengerId     891
- Survived          2
- Pclass            3
- Sex               2
- Age              88
- SibSp             7
- Parch             7
- Fare            248
- Embarked          3
- FamilySize        9
- Title_Master      2
- Title_Miss        2
- Title_Mr          2
- Title_Mrs         2
- Title_Rare        2
- Age_Pclass      128
+ PassengerId    891
+ Survived         2
+ Pclass           3
+ Name           891
+ Sex              2
+ Age             88
+ SibSp            7
+ Parch            7
+ Ticket         681
+ Fare           248
+ Cabin          147
+ Embarked         3
  dtype: int64,
-               PassengerId  Survived    Pclass       Sex       Age     SibSp  \
- PassengerId      1.000000 -0.005007 -0.035144 -0.042939  0.034212 -0.057527   
- Survived        -0.005007  1.000000 -0.338481  0.543351 -0.064910 -0.035322   
- Pclass          -0.035144 -0.338481  1.000000 -0.131900 -0.339898  0.083081   
- Sex             -0.042939  0.543351 -0.131900  1.000000 -0.081163  0.114631   
- Age              0.034212 -0.064910 -0.339898 -0.081163  1.000000 -0.233296   
- SibSp           -0.057527 -0.035322  0.083081  0.114631 -0.233296  1.000000   
- Parch           -0.001652  0.081629  0.018443  0.245489 -0.172482  0.414838   
- Fare             0.012658  0.257307 -0.549500  0.182333  0.096688  0.159651   
- Embarked        -0.030467  0.106811  0.045702  0.116569 -0.009165 -0.059961   
- FamilySize      -0.040143  0.016639  0.065997  0.200988 -0.245619  0.890712   
- Title_Master    -0.026151  0.085221  0.082081 -0.159934 -0.373960  0.349559   
- Title_Miss      -0.067731  0.335636 -0.010261  0.693916 -0.248559  0.083462   
- Title_Mr         0.038850 -0.549199  0.142698 -0.867334  0.180808 -0.250489   
- Title_Mrs        0.010256  0.341994 -0.153758  0.550146  0.167687  0.061668   
- Title_Rare       0.063948 -0.012054 -0.187174 -0.075638  0.192912 -0.025874   
- Age_Pclass       0.004083 -0.324559  0.522045 -0.172433  0.562135 -0.188211   
+              PassengerId  Survived    Pclass       Age     SibSp     Parch  \
+ PassengerId     1.000000 -0.005007 -0.035144  0.036847 -0.057527 -0.001652   
+ Survived       -0.005007  1.000000 -0.338481 -0.077221 -0.035322  0.081629   
+ Pclass         -0.035144 -0.338481  1.000000 -0.369226  0.083081  0.018443   
+ Age             0.036847 -0.077221 -0.369226  1.000000 -0.308247 -0.189119   
+ SibSp          -0.057527 -0.035322  0.083081 -0.308247  1.000000  0.414838   
+ Parch          -0.001652  0.081629  0.018443 -0.189119  0.414838  1.000000   
+ Fare            0.012658  0.257307 -0.549500  0.096067  0.159651  0.216225   
  
-                  Parch      Fare  Embarked  FamilySize  Title_Master  \
- PassengerId  -0.001652  0.012658 -0.030467   -0.040143     -0.026151   
- Survived      0.081629  0.257307  0.106811    0.016639      0.085221   
- Pclass        0.018443 -0.549500  0.045702    0.065997      0.082081   
- Sex           0.245489  0.182333  0.116569    0.200988     -0.159934   
- Age          -0.172482  0.096688 -0.009165   -0.245619     -0.373960   
- SibSp         0.414838  0.159651 -0.059961    0.890712      0.349559   
- Parch         1.000000  0.216225 -0.078665    0.783111      0.267344   
- Fare          0.216225  1.000000  0.062142    0.217138      0.010908   
- Embarked     -0.078665  0.062142  1.000000   -0.080281     -0.012419   
- FamilySize    0.783111  0.217138 -0.080281    1.000000      0.372472   
- Title_Master  0.267344  0.010908 -0.012419    0.372472      1.000000   
- Title_Miss    0.100998  0.119518  0.170479    0.107500     -0.110981   
- Title_Mr     -0.333905 -0.183766 -0.113971   -0.338014     -0.254903   
- Title_Mrs     0.223575  0.107259 -0.038203    0.153842     -0.087987   
- Title_Rare   -0.059535  0.016275  0.018804   -0.047426     -0.035291   
- Age_Pclass   -0.134979 -0.353204  0.018734   -0.196069     -0.298028   
- 
-               Title_Miss  Title_Mr  Title_Mrs  Title_Rare  Age_Pclass  
- PassengerId    -0.067731  0.038850   0.010256    0.063948    0.004083  
- Survived        0.335636 -0.549199   0.341994   -0.012054   -0.324559  
- Pclass         -0.010261  0.142698  -0.153758   -0.187174    0.522045  
- Sex             0.693916 -0.867334   0.550146   -0.075638   -0.172433  
- Age            -0.248559  0.180808   0.167687    0.192912    0.562135  
- SibSp           0.083462 -0.250489   0.061668   -0.025874   -0.188211  
- Parch           0.100998 -0.333905   0.223575   -0.059535   -0.134979  
- Fare            0.119518 -0.183766   0.107259    0.016275   -0.353204  
- Embarked        0.170479 -0.113971  -0.038203    0.018804    0.018734  
- FamilySize      0.107500 -0.338014   0.153842   -0.047426   -0.196069  
- Title_Master   -0.110981 -0.254903  -0.087987   -0.035291   -0.298028  
- Title_Miss      1.000000 -0.601857  -0.207749   -0.083327   -0.231753  
- Title_Mr       -0.601857  1.000000  -0.477160   -0.191387    0.295167  
- Title_Mrs      -0.207749 -0.477160   1.000000   -0.066063    0.039543  
- Title_Rare     -0.083327 -0.191387  -0.066063    1.000000   -0.023549  
- Age_Pclass     -0.231753  0.295167   0.039543   -0.023549    1.000000  )
+                  Fare  
+ PassengerId  0.012658  
+ Survived     0.257307  
+ Pclass      -0.549500  
+ Age          0.096067  
+ SibSp        0.159651  
+ Parch        0.216225  
+ Fare         1.000000  )
 </pre></div>
 </div>
 </div>
@@ -285,7 +248,7 @@ A positive correlation between 'Survived' and 'Sex' suggests females had a highe
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/8f7ecd511718273cf4197f2fd9002a2861dda197e013b7ff357bb6c7155ea720.png" src="../_images/8f7ecd511718273cf4197f2fd9002a2861dda197e013b7ff357bb6c7155ea720.png" />
+<img alt="../_images/ecf1410b72ff5a60e3e8ff851561af7640a0e8714728d33468b586cd351cef2a.png" src="../_images/ecf1410b72ff5a60e3e8ff851561af7640a0e8714728d33468b586cd351cef2a.png" />
 <img alt="../_images/8957e3eb2550e2a3c620b9314317bdfe5a493bf9184ef375a57856fb1cda7c25.png" src="../_images/8957e3eb2550e2a3c620b9314317bdfe5a493bf9184ef375a57856fb1cda7c25.png" />
 </div>
 </div>
@@ -531,7 +494,9 @@ Best Score: 0.8327914129684263
 
            </div>
           </div>
-          <footer>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../titanic_survival_package.html" class="btn btn-neutral float-left" title="titanic survival prediction package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
 
   <hr/>
 
